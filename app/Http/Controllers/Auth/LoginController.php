@@ -14,7 +14,6 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    // テスト
     protected $redirectTo = '/home';
 
     public function __construct()
