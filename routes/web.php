@@ -17,7 +17,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->where('social', 'twitter|google|facebook');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'twitter|google|facebook');
+
+Route::get('/okra', 'OkraSettingController@indexOkra')->name('okra.index');
+Route::get('/objective', 'OkraSettingController@indexObjective')->name('objective.index');
+Route::post('/objective', 'OkraSettingController@createObjective')->name('objective.create');
+Route::get('/keyresult', 'OkraSettingController@indexKeyResult')->name('keyResult.index');
+Route::post('/keyresult', 'OkraSettingController@createKeyResult')->name('keyResult.create');
+Route::get('/action', 'OkraSettingController@indexAction')->name('action.index');
+Route::post('/action', 'OkraSettingController@createAction')->name('action.create');
+Route::get('/actionpost', 'DailyActionController@indexActionPost')->name('actionPost.index');
+Route::post('/actionpost', 'DailyActionController@createActionPost')->name('actionPost.create');
+Route::get('/timeline', 'TimelineController@indexTimeLineItems')->name('timeline.index');
+Route::get('/mypageinfo', 'MyPageController@indexMyPage')->name('mypageinfo.index');
+Route::post('/profileimage', 'MyPageController@updateProfileImage')->name('profileImage.update');
+
+Route::get('/{any?}', 'HomeController@index')->where('any', '.+');

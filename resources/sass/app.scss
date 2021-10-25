@@ -6,3 +6,53 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.fixed-top, .fixed-bottom {
+    position: fixed;
+}
+
+.f-global-nav {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: white;
+    .nav-list {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+        margin: 0;
+    }
+    .nav-item {
+        display: table-cell;
+        border: solid 1px gray;
+        padding: 4px 0px;
+    }
+    .nav-item a {
+        text-decoration: none;
+    }
+    .nav-item i {
+        display: block;
+        font-size: 24px;
+    }
+    .nav-item a span {
+        display: block;
+        font-size: 10px;
+    }
+}
+
+.bm-burger-button{
+    right: 10px !important;
+    top: 10px !important;
+}
+
+.mode-fade-enter-active, .mode-fade-leave-active {
+    transition: opacity .5s ease
+}
+
+.mode-fade-enter, .mode-fade-leave-to {
+    opacity: 0
+}
