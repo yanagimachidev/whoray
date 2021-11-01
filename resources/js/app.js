@@ -37,7 +37,7 @@ import InfiniteLoading from 'vue-infinite-loading'
 Vue.use(InfiniteLoading)
 
 // FontAwesome
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 // アイコンを読み込み
@@ -45,6 +45,7 @@ library.add(fas);
 // Vueコンポーネントを作成
 Vue.component('v-fa', FontAwesomeIcon);
 //Vue.config.productionTip = false
+dom.watch();
 
 const app = new Vue({
     el: '#app-content',

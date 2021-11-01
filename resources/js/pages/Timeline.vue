@@ -75,11 +75,11 @@ export default {
             this.itemCnt = response.data.last_page;
             this.items.push(response.data.data[0]);
             this.page++;
-            console.log(this.items);
+            //console.log(this.items);
         },
 
         async infiniteHandler($state) {
-            console.log(this.page);
+            //console.log(this.page);
             if (this.itemCnt >= this.page) {
                 await this.fetchItems();
                 $state.loaded();

@@ -73,29 +73,25 @@
         @auth
             <footer class="fixed-bottom">
                 <nav class="f-global-nav">
-                    <ul class="nav-list">
+                    <ul class="nav-list" style="height:60px;">
                         <li class="nav-item">
                             <a href="/home">
-                                <i class="fas fa-history"></i>
-                                <span>タイムライン</span>
+                                <i class="fa fa-comments fa-lg"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/dailyaction">
-                                <i class="fas fa-history"></i>
-                                <span>日々の積み上げ</span>
+                                <i class="fa fa-cubes fa-lg"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/okrasetting">
-                                <i class="fas fa-history"></i>
-                                <span>目的・目標・アクション管理</span>
+                                <i class="fa fa-cogs fa-lg"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/mypage">
-                                <i class="fas fa-history"></i>
-                                <span>マイページ</span>
+                                <i class="fa fa-user fa-lg"></i>
                             </a>
                         </li>
                     </ul>
