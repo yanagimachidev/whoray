@@ -36,8 +36,8 @@ Route::get('/mypageinfo', 'MyPageController@indexMyPage')->name('mypageinfo.inde
 Route::post('/profileimage', 'MyPageController@updateProfileImage')->name('profileImage.update');
 
 Route::get('/', function () {
-    return view('layouts/app');
+    return view('home');
 });
 Route::get('/{any?}', function () {
-    return view('layouts/app');
+    return view('home');
 });
