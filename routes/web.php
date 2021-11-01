@@ -9,11 +9,11 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
 
 Route::get('/', function () {
     return view('welcome');
 });
+*/
 
 Auth::routes();
 
@@ -23,6 +23,7 @@ Auth::routes();
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->where('social', 'twitter|google|facebook');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'twitter|google|facebook');
 
+Route::get('/timeline', 'TimelineController@indexTimeLineItems')->name('timeline.index');
 Route::get('/okra', 'OkraSettingController@indexOkra')->name('okra.index');
 Route::get('/objective', 'OkraSettingController@indexObjective')->name('objective.index');
 Route::post('/objective', 'OkraSettingController@createObjective')->name('objective.create');
@@ -32,8 +33,8 @@ Route::get('/action', 'OkraSettingController@indexAction')->name('action.index')
 Route::post('/action', 'OkraSettingController@createAction')->name('action.create');
 Route::get('/actionpost', 'DailyActionController@indexActionPost')->name('actionPost.index');
 Route::post('/actionpost', 'DailyActionController@createActionPost')->name('actionPost.create');
-Route::get('/timeline', 'TimelineController@indexTimeLineItems')->name('timeline.index');
 Route::get('/mypageinfo', 'MyPageController@indexMyPage')->name('mypageinfo.index');
 Route::post('/profileimage', 'MyPageController@updateProfileImage')->name('profileImage.update');
 
-Route::get('/{any?}', 'HomeController@index')->where('any', '.+');
+Route::get('/', 'TimelineController@indexTimeLineItems')->name('timeline.index');
+Route::get('/{any?}', 'TimelineController@indexTimeLineItems')->name('timeline.index');
