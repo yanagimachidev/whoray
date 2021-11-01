@@ -76,22 +76,22 @@
                     <ul class="nav-list" style="height:60px;">
                         <li class="nav-item">
                             <a href="/home">
-                                <i class="fa fa-comments fa-lg"></i>
+                                <i class="fa fa-comments fa-2x"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/dailyaction">
-                                <i class="fa fa-cubes fa-lg"></i>
+                                <i class="fa fa-cubes fa-2x"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/okrasetting">
-                                <i class="fa fa-cogs fa-lg"></i>
+                                <i class="fa fa-cogs fa-2x"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/mypage">
-                                <i class="fa fa-user fa-lg"></i>
+                                <i class="fa fa-user fa-2x"></i>
                             </a>
                         </li>
                     </ul>
