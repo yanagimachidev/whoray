@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Objective;
+use App\KeyResult;
 use App\Action;
 use App\Experience;
 use App\Post;
@@ -62,6 +64,23 @@ class DailyActionController extends Controller
             $experience->experience = $action['experience'];
             $experience->count = $action['count'];
             Auth::user()->experiences()->save($experience);
+
+            $act = Action::find($action['id']);
+            $act->experience = $act->experience + $action['experience'];
+            $act->count = $action['count'];
+            $act->save();
+
+            $kr = KeyResult::find($action['key_result_id']);
+            $kr->experience = $kr->experience + $action['experience'];
+            $kr->save();
+
+            $ojt = Objective::find($action['objective_id']);
+            $ojt->experience = $ojt->experience + $action['experience'];
+            $ojt->save();
+
+            Auth::user()->experience = Auth::user()->experience ?? 0;
+            Auth::user()->experience = Auth::user()->experience + $action['experience'];
+            Auth::user()->save();
         }
 
         return response($post, 201);

@@ -17,7 +17,7 @@ class TimelineController extends Controller
      */
     public function indexTimeLineItems()
     {
-        $timeLineItems = Post::orderBy('created_at', 'desc')->with('user')->paginate(5);
+        $timeLineItems = Post::orderBy('id', 'desc')->with('user')->paginate(5);
         foreach($timeLineItems as $timeLineItem){
             $timeLineItem['action_summary'] = unserialize($timeLineItem['action_summary']);
         }

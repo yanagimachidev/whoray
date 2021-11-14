@@ -1,15 +1,11 @@
 <template>
-    <div class="card mt-2">
+    <div class="card mb-2">
         <div class="card-header bg-success text-white p-2">目標：{{kr.name}}</div>
         <div class="card-body p-1">
-            <span>
-                {{kr.status}} /
-            </span>
-            <span>
-                経験値：{{kr.experience}} exp
-            </span>
+            <div>ステータス：{{kr.status}}</div>
+            <div>獲得経験値：{{kr.experience}} exp</div>
         </div>
-        <div class="card-footer bg-light p-2">
+        <div class="card-footer bg-light p-0">
             <div>
                 <Action
                     v-for="action in actions"
@@ -19,7 +15,7 @@
             </div>
             <transition name="mode-fade" mode="out-in">
                 <div class="w-100 mt-2" v-if="isActButton" key="button">
-                    <button type="button" @click="isActButton = false" class="btn border-0 bg-danger text-white">アクションを追加</button>
+                    <button type="button" @click="isActButton = false" class="btn border-0 bg-danger text-white mb-2 ml-2">アクションを追加</button>
                 </div>
                 <div class="okra-form card mt-2" v-else key="form">
                     <div class="card-header bg-danger text-white p-2">アクション</div>

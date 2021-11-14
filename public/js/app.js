@@ -12375,12 +12375,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     act: {
@@ -12410,10 +12404,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -12572,12 +12562,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -12804,6 +12788,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -12818,7 +12809,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response, ydate, ydateStr;
+        var response, tdate, tdateStr, ydate, ydateStr;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -12828,11 +12819,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
+                tdate = new Date();
+                tdateStr = tdate.getFullYear() + '-' + ('00' + (tdate.getMonth() + 1)).slice(-2) + '-' + ('00' + tdate.getDate()).slice(-2);
                 ydate = new Date();
                 ydate.setDate(ydate.getDate() - 1);
                 ydateStr = ydate.getFullYear() + '-' + ('00' + (ydate.getMonth() + 1)).slice(-2) + '-' + ('00' + ydate.getDate()).slice(-2);
 
-                if (new Date(_this.actionDate) < new Date(ydateStr) || new Date(_this.actionDate) > new Date()) {
+                if (new Date(_this.actionDate) < new Date(ydateStr) || new Date(_this.actionDate) > new Date(tdateStr)) {
                   _this.inputFlg = false;
                 } else {
                   _this.inputFlg = true;
@@ -12845,7 +12838,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.actions = response.data.actions;
                 _this.actionText = response.data.action_text;
 
-              case 10:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -12862,24 +12855,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                if (!(_this2.experience < 0)) {
+                  _context2.next = 4;
+                  break;
+                }
+
+                alert("経験値は1日100expまでしか割り振れません");
+                _context2.next = 8;
+                break;
+
+              case 4:
+                _context2.next = 6;
                 return axios.post("/actionpost", {
                   actionText: _this2.actionText,
                   actionDate: _this2.actionDate,
                   actions: _this2.actions
                 });
 
-              case 2:
+              case 6:
                 response = _context2.sent;
                 _this2.inputFlg = false;
 
-              case 4:
+              case 8:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
       }))();
+    }
+  },
+  computed: {
+    experience: function experience() {
+      var inputExSum = 0;
+      this.actions.forEach(function (action) {
+        inputExSum = inputExSum + Number(action.experience);
+      });
+      return 100 - inputExSum;
     }
   },
   watch: {
@@ -12941,6 +12953,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -12964,7 +12988,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 _this.user = response.data;
 
-              case 4:
+                if (!_this.user.experience) {
+                  _this.user.experience = 0;
+                }
+
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -13019,6 +13047,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -13349,11 +13378,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       items: [],
-      itemCnt: 1,
+      pageCnt: 1,
       page: 1
     };
   },
@@ -13372,10 +13405,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                _this.itemCnt = response.data.last_page;
-
-                _this.items.push(response.data.data[0]);
-
+                _this.pageCnt = response.data.last_page;
+                _this.items = _this.items.concat(response.data.data);
                 _this.page++; //console.log(this.items);
 
               case 6:
@@ -13394,7 +13425,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(_this2.itemCnt >= _this2.page)) {
+                if (!(_this2.pageCnt >= _this2.page)) {
                   _context2.next = 6;
                   break;
                 }
@@ -57711,7 +57742,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [_c("RouterView")], 1)
+  return _c("div", [_c("RouterView")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -57735,31 +57766,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card mt-2" }, [
+  return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-header bg-danger text-white p-2" }, [
       _vm._v("アクション：" + _vm._s(_vm.act.name))
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body p-1" }, [
-      _c("span", [
-        _vm._v("\n            " + _vm._s(_vm.act.status) + " /\n        ")
-      ]),
+      _c("div", [_vm._v("ステータス：" + _vm._s(_vm.act.status))]),
       _vm._v(" "),
-      _c("span", [
-        _vm._v(
-          "\n            経験値：" +
-            _vm._s(_vm.act.experience) +
-            " exp /\n        "
-        )
-      ]),
+      _c("div", [_vm._v("獲得経験値：" + _vm._s(_vm.act.experience) + " exp")]),
       _vm._v(" "),
-      _c("span", [
+      _c("div", [
         _vm._v(
-          "\n            積み上げ：" +
-            _vm._s(_vm.act.count) +
-            " " +
-            _vm._s(_vm.act.unit) +
-            "\n        "
+          "積み上げ量：" + _vm._s(_vm.act.count) + " " + _vm._s(_vm.act.unit)
         )
       ])
     ])
@@ -57787,28 +57806,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card mt-2" }, [
+  return _c("div", { staticClass: "card mb-2" }, [
     _c("div", { staticClass: "card-header bg-success text-white p-2" }, [
       _vm._v("目標：" + _vm._s(_vm.kr.name))
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body p-1" }, [
-      _c("span", [
-        _vm._v("\n            " + _vm._s(_vm.kr.status) + " /\n        ")
-      ]),
+      _c("div", [_vm._v("ステータス：" + _vm._s(_vm.kr.status))]),
       _vm._v(" "),
-      _c("span", [
-        _vm._v(
-          "\n            経験値：" +
-            _vm._s(_vm.kr.experience) +
-            " exp\n        "
-        )
-      ])
+      _c("div", [_vm._v("獲得経験値：" + _vm._s(_vm.kr.experience) + " exp")])
     ]),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "card-footer bg-light p-2" },
+      { staticClass: "card-footer bg-light p-0" },
       [
         _c(
           "div",
@@ -57824,7 +57835,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn border-0 bg-danger text-white",
+                    staticClass: "btn border-0 bg-danger text-white mb-2 ml-2",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -57947,32 +57958,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card mt-2" }, [
+  return _c("div", { staticClass: "card mb-2" }, [
     _c("div", { staticClass: "card-header bg-primary text-white p-2" }, [
       _vm._v("目的：" + _vm._s(_vm.obj.name))
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body p-1" }, [
-      _c("span", [
-        _vm._v("\n            " + _vm._s(_vm.obj.category) + " /\n        ")
-      ]),
+      _c("div", [_vm._v("ステータス：" + _vm._s(_vm.obj.status))]),
       _vm._v(" "),
-      _c("span", [
-        _vm._v("\n            " + _vm._s(_vm.obj.status) + " /\n        ")
-      ]),
+      _c("div", [_vm._v("カテゴリー：" + _vm._s(_vm.obj.category))]),
       _vm._v(" "),
-      _c("span", [
-        _vm._v(
-          "\n            経験値：" +
-            _vm._s(_vm.obj.experience) +
-            " exp\n        "
-        )
-      ])
+      _c("div", [_vm._v("獲得経験値：" + _vm._s(_vm.obj.experience) + " exp")])
     ]),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "card-footer bg-light p-2" },
+      { staticClass: "card-footer bg-light p-0" },
       [
         _c(
           "div",
@@ -57991,7 +57992,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn border-0 bg-success text-white",
+                    staticClass: "btn border-0 bg-success text-white mb-2 ml-2",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -58087,7 +58088,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: "mode-fade", mode: "out-in" } }, [
-    _c("div", [
+    _c("div", { staticClass: "container" }, [
       _c(
         "form",
         {
@@ -58105,7 +58106,19 @@ var render = function() {
             { staticClass: "list-group" },
             [
               _c("li", { staticClass: "list-group-item active" }, [
-                _vm._v("積み上げ登録")
+                _c("table", { staticClass: "w-100" }, [
+                  _c("tr", [
+                    _c("td", { staticClass: "text-left" }, [
+                      _vm._v("積み上げ登録")
+                    ]),
+                    _vm._v(" "),
+                    _vm.inputFlg
+                      ? _c("td", { staticClass: "text-right" }, [
+                          _vm._v("未振り分け経験値：" + _vm._s(_vm.experience))
+                        ])
+                      : _vm._e()
+                  ])
+                ])
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "list-group-item" }, [
@@ -58356,44 +58369,62 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: "mode-fade", mode: "out-in" } }, [
-    _c("div", { staticStyle: { height: "80px", width: "80px" } }, [
-      !_vm.user.profile_image
-        ? _c("div", {
-            staticClass: "bg-secondary rounded-circle",
-            staticStyle: { height: "80px", width: "80px" }
-          })
-        : _c("img", {
-            staticClass: "rounded-circle",
-            staticStyle: { height: "80px", width: "80px" },
-            attrs: { src: _vm.user.profile_image }
-          }),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "bg-primary rounded-circle text-center",
-          staticStyle: {
-            height: "25px",
-            width: "25px",
-            position: "relative",
-            bottom: "25px",
-            left: "55px"
-          }
-        },
-        [
-          _c(
-            "a",
-            { attrs: { href: "/profileimage" } },
-            [
-              _c("v-fa", {
-                staticClass: "align-middle text-white",
-                attrs: { icon: ["fas", "pencil-alt"] }
-              })
-            ],
-            1
-          )
-        ]
-      )
+    _c("div", { staticClass: "container" }, [
+      _c("table", [
+        _c("tr", [
+          _c("td", [
+            _c("div", { staticStyle: { height: "80px", width: "80px" } }, [
+              !_vm.user.profile_image
+                ? _c("div", {
+                    staticClass: "bg-secondary rounded-circle",
+                    staticStyle: { height: "80px", width: "80px" }
+                  })
+                : _c("img", {
+                    staticClass: "rounded-circle",
+                    staticStyle: { height: "80px", width: "80px" },
+                    attrs: { src: _vm.user.profile_image }
+                  }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "bg-primary rounded-circle text-center",
+                  staticStyle: {
+                    height: "25px",
+                    width: "25px",
+                    position: "relative",
+                    bottom: "25px",
+                    left: "55px"
+                  }
+                },
+                [
+                  _c(
+                    "a",
+                    { attrs: { href: "/profileimage" } },
+                    [
+                      _c("v-fa", {
+                        staticClass: "align-middle text-white",
+                        attrs: { icon: ["fas", "pencil-alt"] }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("td", {}, [
+            _c("div", { staticClass: "pl-3" }, [
+              _vm._v("ユーザ名：" + _vm._s(_vm.user.name))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pl-3" }, [
+              _vm._v("総獲得経験値：" + _vm._s(_vm.user.experience))
+            ])
+          ])
+        ])
+      ])
     ])
   ])
 }
@@ -58421,6 +58452,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "container" },
     [
       _c(
         "div",
@@ -58548,6 +58580,10 @@ var render = function() {
                           _vm._v("趣味")
                         ]),
                         _vm._v(" "),
+                        _c("option", { attrs: { value: "生活" } }, [
+                          _vm._v("生活")
+                        ]),
+                        _vm._v(" "),
                         _c("option", { attrs: { value: "その他" } }, [
                           _vm._v("その他")
                         ])
@@ -58595,7 +58631,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "w-100 text-center" }, [
       _c("div", [
         _c("input", {
@@ -58679,9 +58715,32 @@ var render = function() {
         _vm._l(_vm.items, function(item) {
           return _c(
             "ul",
-            { key: item.id, staticClass: "list-group mb-2" },
+            {
+              key: item.id,
+              staticClass:
+                "list-group list-group-flush mb-2 border-top border-bottom"
+            },
             [
-              _c("li", { staticClass: "list-group-item active" }, [
+              _c("li", { staticClass: "list-group-item p-1" }, [
+                _c(
+                  "span",
+                  {
+                    staticClass: "mr-1",
+                    staticStyle: { height: "50px", width: "50px" }
+                  },
+                  [
+                    !item.user.profile_image
+                      ? _c("span", {
+                          staticClass: "bg-secondary rounded-circle",
+                          staticStyle: { height: "50px", width: "50px" }
+                        })
+                      : _c("img", {
+                          staticClass: "rounded-circle",
+                          staticStyle: { height: "50px", width: "50px" },
+                          attrs: { src: item.user.profile_image }
+                        })
+                  ]
+                ),
                 _vm._v(
                   "\n                " +
                     _vm._s(item.user.name) +
@@ -58800,7 +58859,7 @@ var render = function() {
           },
           [
             _c("div", { attrs: { slot: "no-more" }, slot: "no-more" }, [
-              _vm._v("データがありません")
+              _vm._v("これ以上データはありません")
             ]),
             _vm._v(" "),
             _c("div", { attrs: { slot: "no-results" }, slot: "no-results" }, [
@@ -76226,6 +76285,9 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // パスとコンポーネントのマッピング
 
 var routes = [{
+  path: '/',
+  component: _pages_Timeline_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
   path: '/home',
   component: _pages_Timeline_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {

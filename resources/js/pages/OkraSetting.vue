@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div>
             <objective
                 v-for="objective in objectives"
@@ -23,6 +23,7 @@
                             <option value="ビジネス">ビジネス</option>
                             <option value="お金">お金</option>
                             <option value="趣味">趣味</option>
+                            <option value="生活">生活</option>
                             <option value="その他">その他</option>
                         </select>
                         <div class="w-100 mt-1 text-right">

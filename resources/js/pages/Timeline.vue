@@ -1,8 +1,12 @@
 <template>
     <transition name="mode-fade" mode="out-in">
         <div>
-            <ul class="list-group mb-2" v-for="item in items" :key="item.id">
-                <li class="list-group-item active">
+            <ul class="list-group list-group-flush mb-2 border-top border-bottom" v-for="item in items" :key="item.id">
+                <li class="list-group-item p-1">
+                    <span class="mr-1" style="height:50px; width:50px;">
+                        <span v-if="!item.user.profile_image" class="bg-secondary rounded-circle" style="height:50px; width:50px;"></span>
+                        <img v-else :src="item.user.profile_image" class="rounded-circle" style="height:50px; width:50px;">
+                    </span>
                     {{item.user.name}}さんの {{item.action_date}} の積み上げ
                 </li>
                 <li class="list-group-item" v-for="action in item.action_summary" :key="action.id">
@@ -53,7 +57,7 @@
             </ul>
             <infinite-loading @infinite="infiniteHandler" spinner="spiral">
                 <!--div slot="spinner">ロード中...</div-->
-                <div slot="no-more">データがありません</div>
+                <div slot="no-more">これ以上データはありません</div>
                 <div slot="no-results">データがありません</div>
             </infinite-loading>
         </div>
@@ -65,22 +69,22 @@ export default {
     data () {
         return {
             items: [],
-            itemCnt:1,
+            pageCnt:1,
             page: 1,
         }
     },
     methods: {
         async fetchItems () {
             const response = await axios.get('/timeline?page=' + this.page);
-            this.itemCnt = response.data.last_page;
-            this.items.push(response.data.data[0]);
+            this.pageCnt = response.data.last_page;
+            this.items = this.items.concat(response.data.data);
             this.page++;
             //console.log(this.items);
         },
 
         async infiniteHandler($state) {
             //console.log(this.page);
-            if (this.itemCnt >= this.page) {
+            if (this.pageCnt >= this.page) {
                 await this.fetchItems();
                 $state.loaded();
             } else {

@@ -1,9 +1,16 @@
 <template>
     <transition name="mode-fade" mode="out-in">
-        <div>
+        <div v-cloak class="container">
             <form class="form" @submit.prevent="actionPost">
                 <ul class="list-group">
-                    <li class="list-group-item active">積み上げ登録</li>
+                    <li class="list-group-item active">
+                        <table class="w-100">
+                            <tr>
+                                <td class="text-left">積み上げ登録</td>
+                                <td v-if="inputFlg" class="text-right">未振り分け経験値：{{experience}}</td>
+                            </tr>
+                        </table>
+                    </li>
                     <li class="list-group-item">
                         <input type="date" class="form-control text-center" v-model="actionDate" @change="fetchActions">
                     </li>
@@ -87,12 +94,16 @@ export default {
     methods: {
         async fetchActions () {
             const response = await axios.get('/actionpost?postdate=' + this.actionDate);
+            const tdate = new Date();
+            const tdateStr = tdate.getFullYear() + '-'
+                + ('00' + (tdate.getMonth()+1)).slice(-2) + '-'
+                + ('00' + tdate.getDate()).slice(-2);
             const ydate = new Date();
             ydate.setDate(ydate.getDate() - 1);
             const ydateStr = ydate.getFullYear() + '-'
                 + ('00' + (ydate.getMonth()+1)).slice(-2) + '-'
                 + ('00' + ydate.getDate()).slice(-2);
-            if(new Date(this.actionDate) < new Date(ydateStr) || new Date(this.actionDate) > new Date()){
+            if(new Date(this.actionDate) < new Date(ydateStr) || new Date(this.actionDate) > new Date(tdateStr)){
                 this.inputFlg = false;
             }else{
                 this.inputFlg = true;
@@ -105,12 +116,25 @@ export default {
         },
 
         async actionPost () {
-            const response = await axios.post(`/actionpost`, {
-                actionText: this.actionText,
-                actionDate: this.actionDate,
-                actions: this.actions
+            if(this.experience < 0){
+                alert("経験値は1日100expまでしか割り振れません");
+            }else{
+                const response = await axios.post(`/actionpost`, {
+                    actionText: this.actionText,
+                    actionDate: this.actionDate,
+                    actions: this.actions
+                });
+                this.inputFlg = false;
+            }
+        }
+    },
+    computed: {
+        experience: function () {
+            let inputExSum = 0;
+            this.actions.forEach(action => {
+                inputExSum = inputExSum + Number(action.experience);
             });
-            this.inputFlg = false;
+            return 100 - inputExSum;
         }
     },
     watch: {

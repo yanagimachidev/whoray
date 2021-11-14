@@ -17,6 +17,8 @@ Route::get('/', function () {
 //Route::get('/home', 'HomeController@index')->name('home');
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Auth::routes();
 
 Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')->where('social', 'twitter|google|facebook');
@@ -36,8 +38,16 @@ Route::get('/mypageinfo', 'MyPageController@indexMyPage')->name('mypageinfo.inde
 Route::post('/profileimage', 'MyPageController@updateProfileImage')->name('profileImage.update');
 
 Route::get('/', function () {
-    return view('home');
+    if(Auth::check()){
+        return view('home');
+    } else {
+        return view('auth.login');
+    }
 });
 Route::get('/{any?}', function () {
-    return view('home');
+    if(Auth::check()){
+        return view('home');
+    } else {
+        return view('auth.login');
+    }
 });

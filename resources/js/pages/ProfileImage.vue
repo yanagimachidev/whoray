@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="w-100 text-center">
             <div>
                 <input type="file" name="image" accept="image/*" @change="setImage" class="mb-2" style="width:300px;">

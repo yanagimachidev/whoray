@@ -10,14 +10,14 @@
     <title>{{ config('app.name', 'Whoray') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') . '?20211114' }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') . '?20211114' }}" rel="stylesheet">
 
     <!-- Icon設定 -->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -33,12 +33,12 @@
     <div id="app">
         <header id="app-header" class="fixed-top">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-                <div class="container">
+                <div>
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Whoray') }}
                     </a>
                 </div>
-            </nav>
+            </--nav>
             @guest
                 <slide id="burger-menu" right>
                     <a class="nav-link" href="{{ route('login') }}">
@@ -64,10 +64,10 @@
             @endguest
         </header>
 
-        <main class="py-3">
-            <div class="mt-5"></div>
-            @yield('content')
-            <div class="mb-5"></div>
+        <main class="pt-3 pb-4">
+            <div class="mt-5 mb-5">
+                @yield('content')
+            </div>
         </main>
 
         @auth

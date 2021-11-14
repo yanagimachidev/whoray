@@ -14,6 +14,10 @@ Vue.use(VueRouter)
 // パスとコンポーネントのマッピング
 const routes = [
     {
+        path: '/',
+        component: Timeline
+    },
+    {
         path: '/home',
         component: Timeline
     },

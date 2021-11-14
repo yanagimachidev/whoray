@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('profile_mini_image')->nullable();
             $table->string('profile_bg_image')->nullable();
             $table->string('profile_bg_mini_image')->nullable();
+            $table->string('experience')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

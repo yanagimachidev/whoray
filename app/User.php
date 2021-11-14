@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'token',
+        'name', 'email', 'password', 'token', 'experience',
     ];
 
     /**
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $visible = [
-        'id', 'name', 'profile_image', 'profile_mini_image', 'profile_bg_image', 'profile_bg_mini_image' ,'objectives', 'keyResults', 'actions', 'experiences', 'posts'
+        'id', 'name', 'profile_image', 'profile_mini_image', 'profile_bg_image', 'profile_bg_mini_image' , 'experience','objectives', 'keyResults', 'actions', 'experiences', 'posts'
     ];
 
     /**
