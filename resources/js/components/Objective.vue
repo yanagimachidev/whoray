@@ -2,7 +2,30 @@
     <div class="card mb-2">
         <div class="card-header bg-primary text-white p-2">目的：{{obj.name}}</div>
         <div class="card-body p-1">
-            <div>ステータス：{{obj.status}}</div>
+            <div>
+                <table class="w-100">
+                    <tr v-if="isObjUpdate" class="w-100">
+                        <td class="w-50">ステータス
+                            <select name="status" class="form-control w-100" v-model="oStatus">
+                                <option value="積み上げ中">積み上げ中</option>
+                                <option value="休止">休止</option>
+                                <option value="達成">達成</option>
+                                <option value="取り下げ">取り下げ</option>
+                            </select>
+                        </td>
+                        <td class="w-100 align-bottom text-right">
+                            <button type="button" @click="objectStatusUpdate" class="btn btn-primary p-1">保存</button>
+                            <button type="button" @click="toNotIsObjUpdate" class="btn btn-danger p-1">キャンセル</button>
+                        </td>
+                    </tr>
+                    <tr v-else class="w-100">
+                        <td class="w-75">ステータス：{{obj.status}}</td>
+                        <td class="w-100 text-right">
+                            <button type="button" @click="toIsObjUpdate" class="p-0 m-0 btn btn-link">編集</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <div>カテゴリー：{{obj.category}}</div>
             <div>獲得経験値：{{obj.experience}} exp</div>
         </div>
@@ -47,8 +70,10 @@ export default {
     data () {
         return {
             kName: '',
+            oStatus: '',
             keyResults: [],
-            isKrButton: true
+            isKrButton: true,
+            isObjUpdate: false
         }
     },
     components: {
@@ -71,6 +96,24 @@ export default {
 
             this.keyResults.push(response.data);
             this.isKrButton = true;
+        },
+
+        async objectStatusUpdate () {
+            const response = await axios.post(`/objectivestatusupdate`, {
+                objectiveId: this.obj.id,
+                status: this.oStatus
+            });
+
+            location.reload();
+        },
+
+        async toIsObjUpdate () {
+            this.oStatus = this.obj.status;
+            this.isObjUpdate = true;
+        },
+
+        async toNotIsObjUpdate () {
+            this.isObjUpdate = false;
         }
     },
     watch: {

@@ -21,7 +21,7 @@ class DailyActionController extends Controller
     }
 
     /**
-     * 目標一覧
+     * 投稿用のデイリーアクションの取得
      */
     public function indexActionPost(Request $request)
     {
@@ -31,7 +31,7 @@ class DailyActionController extends Controller
             $actionPost['actions'] = unserialize($actionPost['action_summary']);
             return $actionPost;
         }else if($pDate >= date("Y-m-d", strtotime('-1 day'))){
-            $actionPost['actions'] = Action::where('user_id', Auth::id())->get();
+            $actionPost['actions'] = Action::where([['user_id', Auth::id()], ['status', '積み上げ中']])->get();
             return $actionPost;
         }else{
             return $actionPost;
@@ -39,7 +39,7 @@ class DailyActionController extends Controller
     }
 
     /**
-     * 目標設定
+     * デイリーアクション追加
      * @param ActionPost $request
      * @return \Illuminate\Http\Response
      */
@@ -78,9 +78,32 @@ class DailyActionController extends Controller
             $ojt->experience = $ojt->experience + $action['experience'];
             $ojt->save();
 
-            Auth::user()->experience = Auth::user()->experience ?? 0;
-            Auth::user()->experience = Auth::user()->experience + $action['experience'];
-            Auth::user()->save();
+            $user = Auth::user();
+            $user->experience = $user->experience ?? 0;
+            $user->experience = $user->experience + $action['experience'];
+            if($ojt->category == '勉強'){
+                $user->study_experience = $user->study_experience ?? 0;
+                $user->study_experience = $user->study_experience + $action['experience'];
+            }else if($ojt->category == 'ボディメイク'){
+                $user->bodymake_experience = $user->bodymake_experience ?? 0;
+                $user->bodymake_experience = $user->bodymake_experience + $action['experience'];
+            }else if($ojt->category == 'ビジネス'){
+                $user->business_experience = $user->business_experience ?? 0;
+                $user->business_experience = $user->business_experience + $action['experience'];
+            }else if($ojt->category == 'お金'){
+                $user->money_experience = $user->money_experience ?? 0;
+                $user->money_experience = $user->money_experience + $action['experience'];
+            }else if($ojt->category == '趣味'){
+                $user->hobby_experience = $user->hobby_experience ?? 0;
+                $user->hobby_experience = $user->hobby_experience + $action['experience'];
+            }else if($ojt->category == '生活'){
+                $user->life_experience = $user->life_experience ?? 0;
+                $user->life_experience = $user->life_experience + $action['experience'];
+            }else if($ojt->category == 'その他'){
+                $user->other_experience = $user->other_experience ?? 0;
+                $user->other_experience = $user->other_experience + $action['experience'];
+            }
+            $user->save();
         }
 
         return response($post, 201);

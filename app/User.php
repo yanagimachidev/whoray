@@ -25,7 +25,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $visible = [
-        'id', 'name', 'profile_image', 'profile_mini_image', 'profile_bg_image', 'profile_bg_mini_image' , 'experience','objectives', 'keyResults', 'actions', 'experiences', 'posts'
+        'id', 'name', 'profile_image', 'profile_mini_image', 'profile_bg_image', 'profile_bg_mini_image' ,
+        'experience','objectives', 'keyResults', 'actions', 'posts', 'experiences', 'study_experience',
+        'bodymake_experience', 'business_experience', 'money_experience', 'hobby_experience',
+        'life_experience', 'other_experience'
     ];
 
     /**

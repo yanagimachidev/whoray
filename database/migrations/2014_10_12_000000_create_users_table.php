@@ -24,6 +24,13 @@ class CreateUsersTable extends Migration
             $table->string('profile_bg_image')->nullable();
             $table->string('profile_bg_mini_image')->nullable();
             $table->string('experience')->nullable();
+            $table->string('study_experience')->nullable();
+            $table->string('bodymake_experience')->nullable();
+            $table->string('business_experience')->nullable();
+            $table->string('money_experience')->nullable();
+            $table->string('hobby_experience')->nullable();
+            $table->string('life_experience')->nullable();
+            $table->string('other_experience')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -36,6 +36,10 @@ import './bootstrap'
 import InfiniteLoading from 'vue-infinite-loading'
 Vue.use(InfiniteLoading)
 
+// モーダル画面
+import VModal from 'vue-js-modal'
+Vue.use(VModal);
+
 // FontAwesome
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
