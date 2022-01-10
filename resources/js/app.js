@@ -43,9 +43,10 @@ Vue.use(VModal);
 // FontAwesome
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 // アイコンを読み込み
-library.add(fas);
+library.add(fas, fab);
 // Vueコンポーネントを作成
 Vue.component('v-fa', FontAwesomeIcon);
 //Vue.config.productionTip = false
