@@ -47,7 +47,7 @@ class DailyActionController extends Controller
     {
         $post = new Post();
         $post->action_summary = serialize($request->get('actions'));
-        $post->action_text = $request->get('actionText');
+        $post->action_text = nl2br($request->get('actionText'));
         $post->action_date = $request->get('actionDate');
         $post->comment_cnt = 0;
         $post->like_cnt = 0;

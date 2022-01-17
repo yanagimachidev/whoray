@@ -11,7 +11,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="mt-1">ユーザ名：{{user.name}}</div>
+                <div class="mt-1">ユーザー名：{{user.name}}</div>
             </div>
             <table border="1" style="border-collapse:collapse" class="w-100 mt-1">
                 <tr>

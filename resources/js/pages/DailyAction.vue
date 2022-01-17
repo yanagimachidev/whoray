@@ -65,7 +65,7 @@
                             <textarea class="form-control" v-model="actionText"></textarea>
                         </div>
                         <div v-else key="textareaOutput">
-                            <p>{{actionText}}</p>
+                            <p v-html="actionText"></p>
                         </div>
                     </li>
                     <li class="list-group-item" v-if="inputFlg" key="button">

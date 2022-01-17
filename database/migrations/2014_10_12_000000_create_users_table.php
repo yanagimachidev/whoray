@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('hobby_experience')->nullable();
             $table->string('life_experience')->nullable();
             $table->string('other_experience')->nullable();
+            $table->text('profile_text')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

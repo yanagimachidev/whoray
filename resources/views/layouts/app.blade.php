@@ -42,11 +42,11 @@
             @guest
                 <slide id="burger-menu" right>
                     <a class="nav-link" href="{{ route('login') }}">
-                        <span>{{ __('Login') }}</span>
+                        <span>{{ __('login.login') }}</span>
                     </a>
                     @if (Route::has('register'))
                         <a class="nav-link" href="{{ route('register') }}">
-                            <span>{{ __('Register') }}</span>
+                            <span>{{ __('login.register') }}</span>
                         </a>
                     @endif
                 </slide>
@@ -55,7 +55,7 @@
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-                            <span>{{ __('Logout') }}</span>
+                            <span>{{ __('login.logout') }}</span>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

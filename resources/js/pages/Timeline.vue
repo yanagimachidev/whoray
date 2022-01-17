@@ -51,7 +51,7 @@
                 <li class="list-group-item">
                     <div>【本日の一言】</div>
                     <div>
-                        <p>{{item.action_text}}</p>
+                        <p v-html="item.action_text"></p>
                     </div>
                 </li>
             </ul>
