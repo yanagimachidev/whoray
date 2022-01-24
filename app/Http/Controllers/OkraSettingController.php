@@ -51,8 +51,6 @@ class OkraSettingController extends Controller
         $objective = new Objective();
         $objective->name = $request->get('name');
         $objective->category = $request->get('category');
-        $objective->status = '積み上げ中';
-        $objective->experience = 0;
         Auth::user()->Objectives()->save($objective);
         return response($objective, 201);
     }
@@ -102,9 +100,8 @@ class OkraSettingController extends Controller
         $keyResult = new KeyResult();
         $keyResult->objective_id = $request->get('objectiveId');
         $keyResult->name = $request->get('name');
-        $keyResult->status = '積み上げ中';
-        $keyResult->experience = 0;
         Auth::user()->keyResults()->save($keyResult);
+        $keyResult = KeyResult::find($keyResult->id);
         return response($keyResult, 201);
     }
 
@@ -148,11 +145,9 @@ class OkraSettingController extends Controller
         $action->objective_id = $request->get('objectiveId');
         $action->key_result_id = $request->get('keyResultId');
         $action->name = $request->get('name');
-        $action->status = '積み上げ中';
         $action->unit = $request->get('unit');
-        $action->experience = 0;
-        $action->count = 0;
         Auth::user()->actions()->save($action);
+        $action = Action::find($action->id);
         return response($action, 201);
     }
 

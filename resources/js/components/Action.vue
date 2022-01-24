@@ -55,12 +55,12 @@ export default {
             location.reload();
         },
 
-        async toIsActUpdate () {
+        toIsActUpdate () {
             this.aStatus = this.act.status;
             this.isActUpdate = true;
         },
 
-        async toNotIsActUpdate () {
+        toNotIsActUpdate () {
             this.isActUpdate = false;
         }
     }

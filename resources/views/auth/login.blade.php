@@ -71,14 +71,14 @@
                             </div>
                         </div>
 
-                        <!--div class="form-group row">
+                        <div class="form-group row">
                             <label for="name" class="col-sm-4 col-form-label text-md-right">SNSログイン</label>
                             <div class="col-md-6">
                                 <a href="{{ url('login/facebook')}}" class="btn btn-primary"><i class="fab fa-facebook-square fa-lg mr-2"></i>Facebook</a>
-                                <a href="{{ url('login/google')}}" class="btn btn-danger"><i class="fa fa-google"> Google</i></a>
-                                <a href="{{ url('login/github')}}" class="btn btn-secondary"><i class="fa fa-github"> GitHub</i></a>
+                                <!--a href="{{ url('login/google')}}" class="btn btn-danger"><i class="fa fa-google"> Google</i></！a>
+                                <a-- href="{{ url('login/github')}}" class="btn btn-secondary"><i class="fa fa-github"> GitHub</i></a-->
                             </div>
-                        </div-->
+                        </div>
                     </form>
                 </div>
             </div>

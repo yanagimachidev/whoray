@@ -39,6 +39,7 @@ Route::post('/action', 'OkraSettingController@createAction')->name('action.creat
 Route::post('/actionstatusupdate', 'OkraSettingController@statusUpdateAction')->name('action.status.update');
 Route::get('/mypageinfo', 'MyPageController@indexMyPage')->name('mypageinfo.index');
 Route::post('/profileimage', 'MyPageController@updateProfileImage')->name('profileImage.update');
+Route::post('/myinfoupdate', 'MyPageController@myInfoUpdate')->name('maypageinfo.update');
 
 Route::get('/', function () {
     if(Auth::check()){

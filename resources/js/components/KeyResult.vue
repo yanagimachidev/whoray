@@ -112,12 +112,12 @@ export default {
             location.reload();
         },
 
-        async toIsKrUpdate () {
+        toIsKrUpdate () {
             this.kStatus = this.kr.status;
             this.isKrUpdate = true;
         },
 
-        async toNotIsKrUpdate () {
+        toNotIsKrUpdate () {
             this.isKrUpdate = false;
         }
     },

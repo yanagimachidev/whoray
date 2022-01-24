@@ -49,8 +49,6 @@ class DailyActionController extends Controller
         $post->action_summary = serialize($request->get('actions'));
         $post->action_text = nl2br($request->get('actionText'));
         $post->action_date = $request->get('actionDate');
-        $post->comment_cnt = 0;
-        $post->like_cnt = 0;
         Auth::user()->posts()->save($post);
 
         $actions = $request->get('actions');
@@ -67,7 +65,7 @@ class DailyActionController extends Controller
 
             $act = Action::find($action['id']);
             $act->experience = $act->experience + $action['experience'];
-            $act->count = $action['count'];
+            $act->count = $act->count + $action['count'];
             $act->save();
 
             $kr = KeyResult::find($action['key_result_id']);
@@ -79,28 +77,20 @@ class DailyActionController extends Controller
             $ojt->save();
 
             $user = Auth::user();
-            $user->experience = $user->experience ?? 0;
             $user->experience = $user->experience + $action['experience'];
             if($ojt->category == '勉強'){
-                $user->study_experience = $user->study_experience ?? 0;
                 $user->study_experience = $user->study_experience + $action['experience'];
             }else if($ojt->category == 'ボディメイク'){
-                $user->bodymake_experience = $user->bodymake_experience ?? 0;
                 $user->bodymake_experience = $user->bodymake_experience + $action['experience'];
             }else if($ojt->category == 'ビジネス'){
-                $user->business_experience = $user->business_experience ?? 0;
                 $user->business_experience = $user->business_experience + $action['experience'];
             }else if($ojt->category == 'お金'){
-                $user->money_experience = $user->money_experience ?? 0;
                 $user->money_experience = $user->money_experience + $action['experience'];
             }else if($ojt->category == '趣味'){
-                $user->hobby_experience = $user->hobby_experience ?? 0;
                 $user->hobby_experience = $user->hobby_experience + $action['experience'];
             }else if($ojt->category == '生活'){
-                $user->life_experience = $user->life_experience ?? 0;
                 $user->life_experience = $user->life_experience + $action['experience'];
             }else if($ojt->category == 'その他'){
-                $user->other_experience = $user->other_experience ?? 0;
                 $user->other_experience = $user->other_experience + $action['experience'];
             }
             $user->save();

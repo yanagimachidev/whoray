@@ -20,8 +20,8 @@ class CreateKeyResultsTable extends Migration
             $table->unsignedBigInteger('objective_id');
             $table->foreign('objective_id')->references('id')->on('objectives');
             $table->string('name');
-            $table->string('status');
-            $table->unsignedInteger('experience');
+            $table->string('status')->default('積み上げ中');
+            $table->unsignedInteger('experience')->default(0);
             $table->timestamps();
         });
     }

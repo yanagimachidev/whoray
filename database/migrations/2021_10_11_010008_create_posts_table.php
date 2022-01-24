@@ -20,8 +20,8 @@ class CreatePostsTable extends Migration
             $table->text('action_summary');
             $table->text('action_text');
             $table->date('action_date');
-            $table->unsignedInteger('comment_cnt');
-            $table->unsignedInteger('like_cnt');
+            $table->unsignedInteger('comment_cnt')->default(0);
+            $table->unsignedInteger('like_cnt')->default(0);
             $table->timestamps();
         });
     }

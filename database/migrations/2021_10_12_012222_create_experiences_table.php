@@ -26,8 +26,8 @@ class CreateExperiencesTable extends Migration
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts');
             $table->date('action_date');
-            $table->unsignedInteger('experience');
-            $table->unsignedBigInteger('count');
+            $table->unsignedInteger('experience')->default(0);
+            $table->unsignedBigInteger('count')->default(0);
             $table->timestamps();
         });
     }

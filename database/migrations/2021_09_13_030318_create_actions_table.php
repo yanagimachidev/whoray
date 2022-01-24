@@ -22,10 +22,10 @@ class CreateActionsTable extends Migration
             $table->unsignedBigInteger('key_result_id');
             $table->foreign('key_result_id')->references('id')->on('key_results');
             $table->string('name');
-            $table->string('status');
+            $table->string('status')->default('積み上げ中');
             $table->string('unit');
-            $table->unsignedInteger('experience');
-            $table->unsignedBigInteger('count');
+            $table->unsignedInteger('experience')->default(0);
+            $table->unsignedBigInteger('count')->default(0);
             $table->timestamps();
         });
     }

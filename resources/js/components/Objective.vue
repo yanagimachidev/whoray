@@ -107,12 +107,12 @@ export default {
             location.reload();
         },
 
-        async toIsObjUpdate () {
+        toIsObjUpdate () {
             this.oStatus = this.obj.status;
             this.isObjUpdate = true;
         },
 
-        async toNotIsObjUpdate () {
+        toNotIsObjUpdate () {
             this.isObjUpdate = false;
         }
     },

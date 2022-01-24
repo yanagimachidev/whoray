@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileImageSetting;
+use App\Http\Requests\MyInfoUpdate;
 use Illuminate\Support\Facades\Auth;
 
 class MyPageController extends Controller
@@ -24,7 +25,7 @@ class MyPageController extends Controller
     }
 
     /**
-     * 目標設定
+     * 画像設定
      * @param ProfileImageSetting $request
      * @return \Illuminate\Http\Response
      */
@@ -41,6 +42,20 @@ class MyPageController extends Controller
         imagedestroy($imgData);
         $user = User::find(Auth::id());
         $user->profile_image = '/storage/profile/' . $filename;
+        $user->save();
+        return response('update success!!', 201);
+    }
+
+/**
+     * マイページ情報更新
+     * @param MyInfoUpdate $request
+     * @return \Illuminate\Http\Response
+     */
+    public function myInfoUpdate(MyInfoUpdate $request)
+    {
+        $user = User::find(Auth::id());
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
         $user->save();
         return response('update success!!', 201);
     }

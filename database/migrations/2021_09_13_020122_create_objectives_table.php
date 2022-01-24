@@ -19,8 +19,8 @@ class CreateObjectivesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
             $table->string('category');
-            $table->string('status');
-            $table->unsignedInteger('experience');
+            $table->string('status')->default('積み上げ中');
+            $table->unsignedInteger('experience')->default(0);
             $table->timestamps();
         });
     }

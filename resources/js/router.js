@@ -7,6 +7,7 @@ import DailyAction from './pages/DailyAction.vue'
 import OkraSetting from './pages/OkraSetting.vue'
 import MyPage from './pages/MyPage.vue'
 import ProfileImage from './pages/ProfileImage.vue'
+import MyInfoEdit from './pages/MyInfoEdit.vue'
 
 // VueRouterプラグインを使用する
 Vue.use(VueRouter)
@@ -36,6 +37,10 @@ const routes = [
     {
         path: '/profileimage',
         component: ProfileImage
+    },
+    {
+        path: '/myinfoedit',
+        component: MyInfoEdit
     }
 
 ]
