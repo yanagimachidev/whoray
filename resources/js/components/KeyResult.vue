@@ -1,6 +1,9 @@
 <template>
     <div class="card mb-2">
-        <div class="card-header bg-success text-white p-2">目標：{{kr.name}}</div>
+        <div v-if="isKrUpdate" class="card-header bg-success text-white p-2">目標：
+            <input name="name" type="text" class="form-control mb-1 w-50" v-model="kName">
+        </div>
+        <div v-else class="card-header bg-success text-white p-2">目標：{{kr.name}}</div>
         <div class="card-body p-1">
             <div>
                 <table class="w-100">
@@ -73,6 +76,7 @@ export default {
             aName: '',
             aUnit: '',
             actions: [],
+            kName: '',
             kStatus: '',
             isActButton: true,
             isKrUpdate: false
@@ -106,6 +110,7 @@ export default {
         async keyResultStatusUpdate () {
             const response = await axios.post(`/keyresultstatusupdate`, {
                 keyResultId: this.kr.id,
+                name: this.kName,
                 status: this.kStatus
             });
 
@@ -113,6 +118,7 @@ export default {
         },
 
         toIsKrUpdate () {
+            this.kName = this.kr.name;
             this.kStatus = this.kr.status;
             this.isKrUpdate = true;
         },

@@ -46,54 +46,61 @@ class DailyActionController extends Controller
     public function createActionPost(ActionPost $request)
     {
         $post = new Post();
-        $post->action_summary = serialize($request->get('actions'));
         $post->action_text = nl2br($request->get('actionText'));
         $post->action_date = $request->get('actionDate');
         Auth::user()->posts()->save($post);
 
         $actions = $request->get('actions');
+        $actionSummary = array();
         foreach($actions as $action){
-            $experience = new Experience();
-            $experience->objective_id = $action['objective_id'];
-            $experience->key_result_id = $action['key_result_id'];
-            $experience->action_id = $action['id'];
-            $experience->post_id = $post->id;
-            $experience->action_date = $request->get('actionDate');
-            $experience->experience = $action['experience'];
-            $experience->count = $action['count'];
-            Auth::user()->experiences()->save($experience);
+            if($action['experience'] != 0 || $action['count'] != 0){
+                $actionSummary[] = $action;
 
-            $act = Action::find($action['id']);
-            $act->experience = $act->experience + $action['experience'];
-            $act->count = $act->count + $action['count'];
-            $act->save();
+                $experience = new Experience();
+                $experience->objective_id = $action['objective_id'];
+                $experience->key_result_id = $action['key_result_id'];
+                $experience->action_id = $action['id'];
+                $experience->post_id = $post->id;
+                $experience->action_date = $request->get('actionDate');
+                $experience->experience = $action['experience'];
+                $experience->count = $action['count'];
+                Auth::user()->experiences()->save($experience);
 
-            $kr = KeyResult::find($action['key_result_id']);
-            $kr->experience = $kr->experience + $action['experience'];
-            $kr->save();
+                $act = Action::find($action['id']);
+                $act->experience = $act->experience + $action['experience'];
+                $act->count = $act->count + $action['count'];
+                $act->save();
 
-            $ojt = Objective::find($action['objective_id']);
-            $ojt->experience = $ojt->experience + $action['experience'];
-            $ojt->save();
+                $kr = KeyResult::find($action['key_result_id']);
+                $kr->experience = $kr->experience + $action['experience'];
+                $kr->save();
 
-            $user = Auth::user();
-            $user->experience = $user->experience + $action['experience'];
-            if($ojt->category == '勉強'){
-                $user->study_experience = $user->study_experience + $action['experience'];
-            }else if($ojt->category == 'ボディメイク'){
-                $user->bodymake_experience = $user->bodymake_experience + $action['experience'];
-            }else if($ojt->category == 'ビジネス'){
-                $user->business_experience = $user->business_experience + $action['experience'];
-            }else if($ojt->category == 'お金'){
-                $user->money_experience = $user->money_experience + $action['experience'];
-            }else if($ojt->category == '趣味'){
-                $user->hobby_experience = $user->hobby_experience + $action['experience'];
-            }else if($ojt->category == '生活'){
-                $user->life_experience = $user->life_experience + $action['experience'];
-            }else if($ojt->category == 'その他'){
-                $user->other_experience = $user->other_experience + $action['experience'];
+                $ojt = Objective::find($action['objective_id']);
+                $ojt->experience = $ojt->experience + $action['experience'];
+                $ojt->save();
+
+                $user = Auth::user();
+                $user->experience = $user->experience + $action['experience'];
+                if($ojt->category == '勉強'){
+                    $user->study_experience = $user->study_experience + $action['experience'];
+                }else if($ojt->category == 'ボディメイク'){
+                    $user->bodymake_experience = $user->bodymake_experience + $action['experience'];
+                }else if($ojt->category == 'ビジネス'){
+                    $user->business_experience = $user->business_experience + $action['experience'];
+                }else if($ojt->category == 'お金'){
+                    $user->money_experience = $user->money_experience + $action['experience'];
+                }else if($ojt->category == '趣味'){
+                    $user->hobby_experience = $user->hobby_experience + $action['experience'];
+                }else if($ojt->category == '生活'){
+                    $user->life_experience = $user->life_experience + $action['experience'];
+                }else if($ojt->category == 'その他'){
+                    $user->other_experience = $user->other_experience + $action['experience'];
+                }
+                $user->save();
             }
-            $user->save();
+
+            $post->action_summary = serialize($actionSummary);
+            $post->save();
         }
 
         return response($post, 201);

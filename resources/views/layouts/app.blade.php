@@ -10,14 +10,14 @@
     <title>{{ config('app.name', 'Whoray') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') . '?20220110' }}" defer></script>
+    <script src="{{ asset('js/app.js') . '?20220125' }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') . '?20220110' }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') . '?20220125' }}" rel="stylesheet">
 
     <!-- Icon設定 -->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">

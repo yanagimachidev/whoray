@@ -1,6 +1,9 @@
 <template>
     <div class="card mb-2">
-        <div class="card-header bg-primary text-white p-2">目的：{{obj.name}}</div>
+        <div v-if="isObjUpdate" class="card-header bg-primary text-white p-2">目的：
+            <input name="name" type="text" class="form-control mb-1 w-50" v-model="oName">
+        </div>
+        <div v-else class="card-header bg-primary text-white p-2">目的：{{obj.name}}</div>
         <div class="card-body p-1">
             <div>
                 <table class="w-100">
@@ -71,6 +74,7 @@ export default {
         return {
             kName: '',
             oStatus: '',
+            oName: '',
             keyResults: [],
             isKrButton: true,
             isObjUpdate: false
@@ -101,6 +105,7 @@ export default {
         async objectStatusUpdate () {
             const response = await axios.post(`/objectivestatusupdate`, {
                 objectiveId: this.obj.id,
+                name: this.oName,
                 status: this.oStatus
             });
 
@@ -108,6 +113,7 @@ export default {
         },
 
         toIsObjUpdate () {
+            this.oName = this.obj.name;
             this.oStatus = this.obj.status;
             this.isObjUpdate = true;
         },

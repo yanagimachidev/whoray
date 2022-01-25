@@ -63,19 +63,22 @@ class OkraSettingController extends Controller
     public function statusUpdateObjective(ObjectiveStatusUpdate $request)
     {
         $objective = Objective::find($request->get('objectiveId'));
+        $objective->name = $request->get('name');
         $objective->status = $request->get('status');
         $objective->save();
 
-        $keyResults = KeyResult::where([['status', '積み上げ中'], ['objective_id', $request->get('objectiveId')]])->get();
-        foreach ($keyResults as $keyResult){
-            $keyResult->status = '目的' . $request->get('status');
-            $keyResult->save();
-        }
+        if($request->get('status') != '積み上げ中'){
+            $keyResults = KeyResult::where([['status', '積み上げ中'], ['objective_id', $request->get('objectiveId')]])->get();
+            foreach ($keyResults as $keyResult){
+                $keyResult->status = '目的' . $request->get('status');
+                $keyResult->save();
+            }
 
-        $actions = Action::where([['status', '積み上げ中'], ['objective_id', $request->get('objectiveId')]])->get();
-        foreach ($actions as $action){
-            $action->status = '目的' . $request->get('status');
-            $action->save();
+            $actions = Action::where([['status', '積み上げ中'], ['objective_id', $request->get('objectiveId')]])->get();
+            foreach ($actions as $action){
+                $action->status = '目的' . $request->get('status');
+                $action->save();
+            }
         }
 
         return response($objective, 201);
@@ -113,13 +116,16 @@ class OkraSettingController extends Controller
     public function statusUpdateKeyResult(KeyResultStatusUpdate $request)
     {
         $keyResult = KeyResult::find($request->get('keyResultId'));
+        $keyResult->name = $request->get('name');
         $keyResult->status = $request->get('status');
         $keyResult->save();
 
-        $actions = Action::where([['status', '積み上げ中'], ['key_result_id', $request->get('keyResultId')]])->get();
-        foreach ($actions as $action){
-            $action->status = '目的' . $request->get('status');
-            $action->save();
+        if($request->get('status') != '積み上げ中'){
+            $actions = Action::where([['status', '積み上げ中'], ['key_result_id', $request->get('keyResultId')]])->get();
+            foreach ($actions as $action){
+                $action->status = '目的' . $request->get('status');
+                $action->save();
+            }
         }
 
         return response($keyResult, 201);
@@ -159,6 +165,7 @@ class OkraSettingController extends Controller
     public function statusUpdateAction(ActionStatusUpdate $request)
     {
         $Action = Action::find($request->get('actionId'));
+        $Action->name = $request->get('name');
         $Action->status = $request->get('status');
         $Action->save();
 

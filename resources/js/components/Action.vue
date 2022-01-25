@@ -1,6 +1,9 @@
 <template>
     <div class="card">
-        <div class="card-header bg-danger text-white p-2">アクション：{{act.name}}</div>
+        <div v-if="isActUpdate" class="card-header bg-danger text-white p-2">アクション：
+            <input name="name" type="text" class="form-control mb-1 w-50" v-model="aName">
+        </div>
+        <div v-else class="card-header bg-danger text-white p-2">アクション：{{act.name}}</div>
         <div class="card-body p-1">
             <div>
                 <table class="w-100">
@@ -41,6 +44,7 @@ export default {
     },
     data () {
         return {
+            aName: '',
             aStatus: '',
             isActUpdate: false
         }
@@ -49,6 +53,7 @@ export default {
         async actionStatusUpdate () {
             const response = await axios.post(`/actionstatusupdate`, {
                 actionId: this.act.id,
+                name: this.aName,
                 status: this.aStatus
             });
 
@@ -56,6 +61,7 @@ export default {
         },
 
         toIsActUpdate () {
+            this.aName = this.act.name;
             this.aStatus = this.act.status;
             this.isActUpdate = true;
         },
