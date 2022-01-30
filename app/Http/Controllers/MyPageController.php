@@ -20,7 +20,13 @@ class MyPageController extends Controller
     */
     public function indexMyPage(Request $request)
     {
-        $user = User::find(Auth::id());
+        if($request->has('userid')){
+            $userId = $request->input('userid');
+        }else{
+            $userId = Auth::id();
+        }
+        $user = User::find($userId);
+        $user->myId = Auth::id();
         return $user;
     }
 
