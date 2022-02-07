@@ -32,6 +32,10 @@ class DailyActionController extends Controller
             return $actionPost;
         }else if($pDate >= date("Y-m-d", strtotime('-1 day'))){
             $actionPost['actions'] = Action::where([['user_id', Auth::id()], ['status', '積み上げ中']])->get();
+            foreach($actionPost['actions'] as $action){
+                $action->experience = null;
+                $action->count = null;
+            }
             return $actionPost;
         }else{
             return $actionPost;
@@ -53,7 +57,14 @@ class DailyActionController extends Controller
         $actions = $request->get('actions');
         $actionSummary = array();
         foreach($actions as $action){
-            if($action['experience'] != 0 || $action['count'] != 0){
+            if($action['experience'] != 0 || $action['count'] != 0 || $action['experience'] != null || $action['count'] != null){
+                if($action['experience'] == null){
+                    $action['experience'] = 0;
+                }
+                if($action['count'] == null){
+                    $action['count'] = 0;
+                }
+                
                 $actionSummary[] = $action;
 
                 $experience = new Experience();
