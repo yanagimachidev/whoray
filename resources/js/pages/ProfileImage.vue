@@ -25,6 +25,7 @@
 <script>
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
+import loadImage from 'blueimp-load-image';
 
 export default {
     components: {
@@ -44,17 +45,47 @@ export default {
             if (!file.type.includes("image/")) {
                 alert("画像ファイルを指定してください。");
             }else if (typeof FileReader === "function") {
-                let reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = event => {
-                    if(this.imgSrc != ""){
-                        this.$refs.cropper.replace(event.target.result);
+                loadImage.parseMetaData(
+                    file,
+                    (data) => {
+                        let options = {
+                            canvas: true
+                        };
+                        if (data.exif) {
+                            options.orientation = data.exif.get('Orientation');
+                        }
+
+                        loadImage(
+                            file,
+                            async (canvas) => {
+                                let data = canvas.toDataURL(file.type);
+                                let blob = this.base64ToBlob(data, file.type);
+                                let reader = new FileReader();
+                                reader.readAsDataURL(blob);
+                                reader.onload = event => {
+                                    if(this.imgSrc != ""){
+                                        this.$refs.cropper.replace(event.target.result);
+                                    }
+                                    this.imgSrc = event.target.result;
+                                };
+                            },
+                            options
+                        );
                     }
-                    this.imgSrc = event.target.result;
-                };
+                );
             } else {
                 alert("ブラウザが対応しておりません。");
             }
+        },
+        base64ToBlob(base64, fileType) {
+            let bin = window.atob(base64.replace(/^.*,/, ''));
+            let buffer = new Uint8Array(bin.length);
+            for (let i = 0; i < bin.length; i++) {
+                buffer[i] = bin.charCodeAt(i);
+            }
+            return new Blob([buffer.buffer], {
+                type: fileType ? fileType : 'image/png'
+            });
         },
         async cropImage() {
             this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL("image/png");
